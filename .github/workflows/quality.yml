@@ -1,0 +1,45 @@
+# Reusable quality gate. Called by ci.yml and by promote-to-staging.yml so the
+# same checks run everywhere and only need editing in one place.
+name: Quality
+
+on:
+  workflow_call:
+
+jobs:
+  verify:
+    name: Lint, typecheck & build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the commit under test
+        uses: actions/checkout@v4
+
+      # Next.js 16 requires Node >= 20.9. Pinned to 22 to match local dev.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      # setup-node already caches ~/.npm, so this only adds Next's build cache.
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      # `ci` (not `install`) installs exactly the lockfile and fails if they drift.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # next build type-checks too, but this fails in seconds instead of minutes.
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
