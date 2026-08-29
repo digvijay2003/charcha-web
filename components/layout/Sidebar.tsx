@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { Lightbulb, Plus } from "lucide-react";
 
+import NavLink from "@/components/layout/NavLink";
 import Avatar from "@/components/ui/Avatar";
 import Logo from "@/components/ui/Logo";
 import { currentUser, navItems, thoughtOfTheDay } from "@/lib/mock-data";
-
-const ACTIVE_HREF = "/";
 
 export default function Sidebar() {
   return (
@@ -16,34 +15,26 @@ export default function Sidebar() {
 
       <nav aria-label="Primary">
         <ul className="flex flex-col gap-0.5">
-          {navItems.map(({ label, href, icon: Icon, badge }) => {
-            const isActive = href === ACTIVE_HREF;
-            return (
-              <li key={label}>
-                <Link
-                  href={href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
-                    isActive
-                      ? "bg-soft-purple font-semibold text-brand"
-                      : "font-medium text-muted hover:bg-surface hover:text-ink"
-                  }`}
-                >
-                  <Icon
-                    className={`size-[18px] shrink-0 ${isActive ? "text-brand" : "text-muted group-hover:text-ink"}`}
-                    aria-hidden
-                  />
-                  <span className="flex-1 truncate">{label}</span>
-                  {badge ? (
-                    <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1.5 text-[11px] font-semibold text-white">
-                      {badge}
-                      <span className="sr-only"> unread</span>
-                    </span>
-                  ) : null}
-                </Link>
-              </li>
-            );
-          })}
+          {navItems.map(({ label, href, icon: Icon, badge }) => (
+            <li key={label}>
+              <NavLink
+                href={href}
+                className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink aria-[current=page]:bg-soft-purple aria-[current=page]:font-semibold aria-[current=page]:text-brand"
+              >
+                <Icon
+                  className="size-[18px] shrink-0 text-muted group-hover:text-ink group-aria-[current=page]:text-brand"
+                  aria-hidden
+                />
+                <span className="flex-1 truncate">{label}</span>
+                {badge ? (
+                  <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1.5 text-[11px] font-semibold text-white">
+                    {badge}
+                    <span className="sr-only"> unread</span>
+                  </span>
+                ) : null}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
 
