@@ -1,0 +1,16 @@
+# Verification for the two protected branches.
+#
+# Pushes to development-digvijay are NOT listed here: promote-to-staging.yml
+# already runs the same quality gate for that branch, and listing it in both
+# would burn two identical runs on every commit.
+name: CI
+
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging, main]
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml
