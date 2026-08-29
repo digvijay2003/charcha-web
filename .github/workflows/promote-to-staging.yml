@@ -1,0 +1,65 @@
+# development-digvijay --> staging, automatically, but only when green.
+#
+# The promote job has `needs: quality`, so a failing lint/typecheck/build stops
+# the merge from ever happening. Anything that reaches staging has passed CI.
+name: Promote to staging
+
+on:
+  push:
+    branches: [development-digvijay]
+  workflow_dispatch: # lets you re-run a promotion by hand from the Actions tab
+
+# Two quick pushes would otherwise race to update staging. Queue them instead
+# of cancelling: a cancelled promotion would silently drop a commit.
+concurrency:
+  group: promote-to-staging
+  cancel-in-progress: false
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml
+
+  promote:
+    name: Merge into staging
+    needs: quality
+    runs-on: ubuntu-latest
+
+    # The default GITHUB_TOKEN is read-only; pushing needs this.
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # a shallow clone cannot merge branches
+
+      - name: Configure the committer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge into staging
+        run: |
+          set -euo pipefail
+
+          if git show-ref --verify --quiet refs/remotes/origin/staging; then
+            git checkout -B staging origin/staging
+          else
+            echo "::notice::staging does not exist yet - creating it"
+            git checkout -B staging "$GITHUB_SHA"
+          fi
+
+          # Check the merge explicitly rather than leaning on `set -e`: a
+          # conflict must fail the job loudly, never fall through to the push.
+          if ! git merge --no-ff "$GITHUB_SHA" \
+                 -m "ci: promote development-digvijay to staging ($GITHUB_SHA)"; then
+            git merge --abort || true
+            echo "::error::Conflict promoting to staging. Resolve it locally:"
+            echo "  git checkout staging"
+            echo "  git merge development-digvijay"
+            echo "  # fix the conflicts, commit, then: git push origin staging"
+            exit 1
+          fi
+
+          git push origin staging
