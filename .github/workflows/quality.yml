@@ -37,6 +37,12 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # `LayoutProps`/`PageProps` are globals Next generates into .next/types.
+      # On a clean CI checkout that directory does not exist yet, so tsc must
+      # be given them first. typegen does this without a full build.
+      - name: Generate Next.js route types
+        run: npx next typegen
+
       # next build type-checks too, but this fails in seconds instead of minutes.
       - name: Typecheck
         run: npx tsc --noEmit
