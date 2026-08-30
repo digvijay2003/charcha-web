@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
+import NavLink from "@/components/layout/NavLink";
 import { mobileNavItems } from "@/lib/mock-data";
-
-const ACTIVE_HREF = "/";
 
 export default function MobileNav() {
   return (
@@ -40,16 +39,11 @@ function MobileNavItem({
   icon: Icon,
   badge,
 }: (typeof mobileNavItems)[number]) {
-  const isActive = href === ACTIVE_HREF;
-
   return (
     <li>
-      <Link
+      <NavLink
         href={href}
-        aria-current={isActive ? "page" : undefined}
-        className={`flex w-16 flex-col items-center gap-1 rounded-lg py-1 text-[10px] font-medium transition-colors ${
-          isActive ? "text-brand" : "text-muted"
-        }`}
+        className="flex w-16 flex-col items-center gap-1 rounded-lg py-1 text-[10px] font-medium text-muted transition-colors aria-[current=page]:text-brand"
       >
         <span className="relative">
           <Icon className="size-5" aria-hidden />
@@ -61,7 +55,7 @@ function MobileNavItem({
           ) : null}
         </span>
         {label}
-      </Link>
+      </NavLink>
     </li>
   );
 }
