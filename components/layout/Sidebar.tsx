@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lightbulb, Plus } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 
 import NavLink from "@/components/layout/NavLink";
 import Avatar from "@/components/ui/Avatar";
@@ -37,14 +37,6 @@ export default function Sidebar() {
           ))}
         </ul>
       </nav>
-
-      <Link
-        href="/new"
-        className="charcha-gradient flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(109_61_245/0.7)] transition-all hover:-translate-y-0.5 hover:brightness-105"
-      >
-        <Plus className="size-4" aria-hidden />
-        Start a Charcha
-      </Link>
 
       <section
         aria-labelledby="thought-heading"
