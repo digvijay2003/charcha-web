@@ -14,6 +14,7 @@ import {
   Scale,
   Sprout,
   Users,
+  VenetianMask,
   type LucideIcon,
 } from "lucide-react";
 
@@ -30,6 +31,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: "Home", href: "/", icon: House },
   { label: "Vaad-Vivaad", href: "/vaad-vivaad", icon: Scale },
+  { label: "Gupt-Charcha", href: "/gupt-charcha", icon: VenetianMask },
   { label: "Explore", href: "/explore", icon: Compass },
   { label: "Following", href: "/following", icon: Users },
   { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },

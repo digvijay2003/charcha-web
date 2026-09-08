@@ -3,6 +3,7 @@ import Link from "next/link";
 const modes = [
   { key: "charcha", href: "/", deva: "चर्चा", latin: "Charcha" },
   { key: "vivaad", href: "/vaad-vivaad", deva: "वाद-विवाद", latin: "Vaad-Vivaad" },
+  { key: "gupt", href: "/gupt-charcha", deva: "गुप्त-चर्चा", latin: "Gupt-Charcha" },
 ] as const;
 
 /**
@@ -17,7 +18,7 @@ export default function FeedToggle({
   return (
     <nav
       aria-label="Feed mode"
-      className="inline-flex gap-1 rounded-xl border border-line bg-surface p-1"
+      className="inline-flex flex-wrap gap-1 rounded-xl border border-line bg-surface p-1"
     >
       {modes.map(({ key, href, deva, latin }) => {
         const isActive = key === active;
