@@ -31,6 +31,10 @@
   --gupt: #4c5578;
   --gupt-soft: #eef0f6;
 
+  /* Defaults for the active room; .mode-* overrides these per route. */
+  --mode: #6d3df5;
+  --mode-soft: #f0eaff;
+
   --shadow-card: 0 1px 2px rgb(17 21 47 / 0.04), 0 8px 24px -12px rgb(17 21 47 / 0.12);
   --shadow-lift: 0 2px 4px rgb(17 21 47 / 0.05), 0 18px 40px -16px rgb(17 21 47 / 0.22);
 }
@@ -56,6 +60,9 @@
 
   --gupt: #a8b2d8;
   --gupt-soft: #1c2036;
+
+  --mode: #b39aff;
+  --mode-soft: #201b3d;
 
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
   --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -16px rgb(0 0 0 / 0.7);
@@ -83,6 +90,9 @@
   --color-gupt: var(--gupt);
   --color-soft-gupt: var(--gupt-soft);
 
+  --color-mode: var(--mode);
+  --color-soft-mode: var(--mode-soft);
+
   --color-brand: #6d3df5;
   --color-brand-2: #9b5de5;
   --color-pink: #e85aad;
@@ -96,6 +106,19 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-deva: var(--font-devanagari), var(--font-geist-sans), sans-serif;
 }
+
+/*
+ * Each room shifts the chrome's temperature, not just its accent: Charcha is
+ * warm lavender, Vaad-Vivaad cooler and more structured, Gupt-Charcha dim and
+ * low-chroma. Declared before @layer base so component tokens resolve.
+ */
+.mode-charcha { --canvas: #f8f7fc; --mode: #6d3df5; --mode-soft: #f0eaff; }
+.mode-vivaad  { --canvas: #f5f6fb; --mode: #6d3df5; --mode-soft: #ecebfb; }
+.mode-gupt    { --canvas: #f4f4f8; --mode: #4c5578; --mode-soft: #eceef4; }
+
+.dark .mode-charcha { --canvas: #0c0e1c; --mode: #b39aff; --mode-soft: #201b3d; }
+.dark .mode-vivaad  { --canvas: #0b0d19; --mode: #b39aff; --mode-soft: #1e1c38; }
+.dark .mode-gupt    { --canvas: #0a0b14; --mode: #a8b2d8; --mode-soft: #1c2036; }
 
 @layer base {
   html {

@@ -34,7 +34,7 @@ export default async function GuptThreadPage(
   const { label, icon: Icon } = guptCategories[post.category];
 
   return (
-    <AppShell>
+    <AppShell mode="gupt" showRoomHeader={false}>
       <article>
         <Link
           href="/gupt-charcha"

@@ -50,7 +50,7 @@ export default async function VivaadArenaPage(
   const byId = new Map(vivaad.args.map((a) => [a.id, a]));
 
   return (
-    <AppShell>
+    <AppShell mode="vivaad" showRoomHeader={false}>
       <article>
         <Link
           href="/vaad-vivaad"
