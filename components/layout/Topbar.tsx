@@ -1,20 +1,41 @@
 import Link from "next/link";
-import { Flame, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
+import NavLink from "@/components/layout/NavLink";
 import Avatar from "@/components/ui/Avatar";
-import { LogoMark } from "@/components/ui/Logo";
+import Logo from "@/components/ui/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { currentUser, streakDays } from "@/lib/mock-data";
+import { currentUser, utilityNav } from "@/lib/mock-data";
+import { modeOrder, modes } from "@/lib/modes";
 
+/**
+ * The three rooms are the primary navigation, so they live here at the top
+ * where every visit starts — not in a side column competing with Bookmarks.
+ */
 export default function Topbar() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-canvas/85 backdrop-blur-md">
-      <div className="flex items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="lg:hidden" aria-label="Charcha home">
-          <LogoMark className="size-9" />
-        </Link>
+      <div className="mx-auto flex max-w-[1560px] items-center gap-4 px-4 sm:px-6 lg:gap-8 lg:px-8">
+        <div className="py-3">
+          <Logo />
+        </div>
 
-        <div role="search" className="relative min-w-0 flex-1 sm:max-w-md">
+        <nav aria-label="Rooms" className="hidden items-stretch self-stretch lg:flex">
+          {modeOrder.map((key) => {
+            const { href, latin } = modes[key];
+            return (
+              <NavLink
+                key={key}
+                href={href}
+                className="-mb-px flex items-center border-b-2 border-transparent px-4 text-sm font-medium text-muted transition-colors hover:text-ink aria-[current=page]:border-mode aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+              >
+                {latin}
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        <div role="search" className="relative ml-auto min-w-0 flex-1 py-3 sm:max-w-xs">
           <label htmlFor="charcha-search" className="sr-only">
             Search Charcha
           </label>
@@ -25,18 +46,36 @@ export default function Topbar() {
           <input
             id="charcha-search"
             type="search"
-            placeholder="Search for discussions, topics or people..."
-            className="w-full rounded-xl border border-line bg-surface py-2.5 pr-4 pl-10 text-sm text-ink transition-colors outline-none placeholder:text-muted focus:border-brand/60 focus:ring-4 focus:ring-brand/10"
+            placeholder="Search"
+            className="w-full rounded-lg border border-line bg-surface py-2 pr-3 pl-10 text-sm text-ink transition-colors outline-none placeholder:text-muted focus:border-mode/60 focus:ring-4 focus:ring-mode/10"
           />
         </div>
 
-        <div className="ml-auto flex items-center gap-2">
-          <span className="hidden items-center gap-1.5 rounded-full bg-soft-orange px-3 py-1.5 text-xs font-semibold text-accent-orange sm:inline-flex">
-            <Flame className="size-3.5" aria-hidden />
-            {streakDays} Day Streak
-          </span>
+        <div className="flex items-center gap-1 py-3">
+          {utilityNav.map(({ label, href, icon: Icon, badge }) => (
+            <Link
+              key={label}
+              href={href}
+              aria-label={badge ? `${label}, ${badge} unread` : label}
+              className="relative hidden size-9 place-items-center rounded-full text-muted transition-colors hover:bg-surface hover:text-ink sm:grid"
+            >
+              <Icon className="size-[18px]" aria-hidden />
+              {badge ? (
+                <span
+                  aria-hidden
+                  className="absolute top-1 right-1 grid h-4 min-w-4 place-items-center rounded-full bg-mode px-1 text-[9px] font-bold text-white"
+                >
+                  {badge}
+                </span>
+              ) : null}
+            </Link>
+          ))}
           <ThemeToggle />
-          <Link href="/profile" aria-label={`Your profile, ${currentUser.name}`}>
+          <Link
+            href="/profile"
+            aria-label={`Your profile, ${currentUser.name}`}
+            className="ml-1"
+          >
             <Avatar name={currentUser.name} size="md" decorative />
           </Link>
         </div>

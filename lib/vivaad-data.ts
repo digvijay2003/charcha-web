@@ -2,8 +2,7 @@ import { formatCount } from "@/lib/format";
 
 /**
  * A vivaad is a motion, not a question: two named sides, timed rounds, and a
- * close. Paksh/Vipaksh are the terms used in Indian school and college debate,
- * and they frame the sides as roles you argue rather than identities you hold.
+ * close.
  */
 export type Side = "paksh" | "vipaksh";
 
@@ -18,9 +17,9 @@ export const stageLabels: Record<Stage, string> = {
   verdict: "Verdict",
 };
 
-export const sideLabels: Record<Side, { deva: string; latin: string }> = {
-  paksh: { deva: "पक्ष", latin: "Paksh" },
-  vipaksh: { deva: "विपक्ष", latin: "Vipaksh" },
+export const sideLabels: Record<Side, string> = {
+  paksh: "For",
+  vipaksh: "Against",
 };
 
 export type Argument = {

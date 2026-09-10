@@ -2,16 +2,13 @@ import {
   Bell,
   Bookmark,
   Briefcase,
-  Compass,
   Cpu,
   GraduationCap,
   Heart,
   Landmark,
   Mail,
   MessageCircle,
-  MessagesSquare,
   Sprout,
-  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -25,13 +22,19 @@ export type NavItem = {
   badge?: number;
 };
 
-export const navItems: NavItem[] = [
-  { label: "Explore", href: "/explore", icon: Compass },
-  { label: "Following", href: "/following", icon: Users },
-  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
-  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+/** Small icon buttons on the right of the top bar. */
+export const utilityNav: NavItem[] = [
   { label: "Notifications", href: "/notifications", icon: Bell, badge: 3 },
   { label: "Messages", href: "/messages", icon: Mail },
+  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
+];
+
+/** Views of the Charcha feed. These sit above the cards, not in a sidebar. */
+export const feedTabs: { label: string; href: string }[] = [
+  { label: "Trending", href: "/" },
+  { label: "Following", href: "/following" },
+  { label: "My Discussions", href: "/discussions" },
+  { label: "Explore", href: "/explore" },
 ];
 
 export type Discussion = {
@@ -116,12 +119,6 @@ export const topics: Topic[] = [
   { name: "Education", count: "1.1K", icon: GraduationCap, accent: "purple" },
   { name: "Lifestyle", count: "980", icon: Sprout, accent: "mint" },
 ];
-
-export const thoughtOfTheDay = {
-  quote:
-    "The quality of your questions determines the quality of your life.",
-  author: "Unknown",
-};
 
 export const currentUser = {
   name: "Arjun Singh",

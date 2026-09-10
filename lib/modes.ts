@@ -7,7 +7,6 @@ export type Mode = "charcha" | "vivaad" | "gupt";
 export type ModeDef = {
   key: Mode;
   href: string;
-  deva: string;
   latin: string;
   /** The room's promise, in the user's words. */
   tagline: string;
@@ -19,7 +18,6 @@ export const modes: Record<Mode, ModeDef> = {
   charcha: {
     key: "charcha",
     href: "/",
-    deva: "चर्चा",
     latin: "Charcha",
     tagline: "Share a thought.",
     contract: "Open discussion. No sides, no winner — understand why people think what they think.",
@@ -28,7 +26,6 @@ export const modes: Record<Mode, ModeDef> = {
   vivaad: {
     key: "vivaad",
     href: "/vaad-vivaad",
-    deva: "वाद-विवाद",
     latin: "Vaad-Vivaad",
     tagline: "Test an idea.",
     contract: "Two sides, timed rounds, a closing bell. Scored on minds changed, not upvotes.",
@@ -37,7 +34,6 @@ export const modes: Record<Mode, ModeDef> = {
   gupt: {
     key: "gupt",
     href: "/gupt-charcha",
-    deva: "गुप्त-चर्चा",
     latin: "Gupt-Charcha",
     tagline: "Say what you can't say.",
     contract: "A new handle every thread. No profiles, no followers, and threads expire.",
