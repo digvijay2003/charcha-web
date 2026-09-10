@@ -36,8 +36,7 @@ export default function ArgumentCard({
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold text-ink">{author}</p>
           <p className={`text-[11px] font-semibold ${styles.text}`}>
-            <span className="font-deva">{sideLabels[side].deva}</span>{" "}
-            {sideLabels[side].latin}
+            {sideLabels[side]}
           </p>
         </div>
       </div>

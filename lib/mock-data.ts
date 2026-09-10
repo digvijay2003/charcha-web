@@ -25,13 +25,17 @@ export type NavItem = {
   badge?: number;
 };
 
-export const navItems: NavItem[] = [
-  { label: "Explore", href: "/explore", icon: Compass },
-  { label: "Following", href: "/following", icon: Users },
-  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
-  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+/**
+ * Your own activity. Lives in the right column on wide screens and in the
+ * account menu everywhere, so it is never more than one click away.
+ */
+export const utilityNav: NavItem[] = [
   { label: "Notifications", href: "/notifications", icon: Bell, badge: 3 },
   { label: "Messages", href: "/messages", icon: Mail },
+  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
+  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+  { label: "Following", href: "/following", icon: Users },
+  { label: "Explore", href: "/explore", icon: Compass },
 ];
 
 export type Discussion = {
@@ -116,12 +120,6 @@ export const topics: Topic[] = [
   { name: "Education", count: "1.1K", icon: GraduationCap, accent: "purple" },
   { name: "Lifestyle", count: "980", icon: Sprout, accent: "mint" },
 ];
-
-export const thoughtOfTheDay = {
-  quote:
-    "The quality of your questions determines the quality of your life.",
-  author: "Unknown",
-};
 
 export const currentUser = {
   name: "Arjun Singh",

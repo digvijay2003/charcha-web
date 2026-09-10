@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import AppShell from "@/components/layout/AppShell";
 import VivaadCard from "@/components/vivaad/VivaadCard";
-import { sideLabels, vivaads } from "@/lib/vivaad-data";
+import { vivaads } from "@/lib/vivaad-data";
 
 export const metadata: Metadata = {
   title: "Vaad-Vivaad — Charcha",
@@ -14,7 +14,7 @@ export default function VaadVivaadPage() {
   return (
     <AppShell
       mode="vivaad"
-      stat={`${vivaads.length} debates open · ${sideLabels.paksh.latin} argues for, ${sideLabels.vipaksh.latin} argues against`}
+      stat={`${vivaads.length} debates open · pick a side, then make your case`}
     >
       <section aria-labelledby="open-debates">
         <h2 id="open-debates" className="sr-only">

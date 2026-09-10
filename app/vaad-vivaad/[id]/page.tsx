@@ -65,8 +65,8 @@ export default async function VivaadArenaPage(
 
         <header className="mt-4 rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span className="font-deva text-xs font-semibold text-accent-purple">
-              वाद-विवाद
+            <span className="text-xs font-semibold text-accent-purple">
+              Debate
             </span>
             <StageIndicator stage={vivaad.stage} />
           </div>
@@ -104,13 +104,13 @@ export default async function VivaadArenaPage(
                 href={`/vaad-vivaad/${vivaad.id}/argue?side=paksh`}
                 className="rounded-lg bg-soft-pink px-3 py-2 text-xs font-semibold text-accent-pink transition-colors hover:brightness-95"
               >
-                Argue for <span className="font-deva">पक्ष</span>
+                Argue for
               </Link>
               <Link
                 href={`/vaad-vivaad/${vivaad.id}/argue?side=vipaksh`}
                 className="rounded-lg bg-soft-mint px-3 py-2 text-xs font-semibold text-accent-mint transition-colors hover:brightness-95"
               >
-                Argue for <span className="font-deva">विपक्ष</span>
+                Argue against
               </Link>
             </div>
           </div>
@@ -127,8 +127,7 @@ export default async function VivaadArenaPage(
                   id={`col-${side}`}
                   className={`mb-3 text-sm font-bold ${accent}`}
                 >
-                  <span className="font-deva">{sideLabels[side].deva}</span>{" "}
-                  {sideLabels[side].latin}
+                  {sideLabels[side]}
                   <span className="font-medium text-muted"> — {heading}</span>
                 </h2>
 

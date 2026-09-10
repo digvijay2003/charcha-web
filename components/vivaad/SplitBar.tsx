@@ -23,18 +23,16 @@ export default function SplitBar({ paksh, shift, size = "sm" }: SplitBarProps) {
         className={`flex items-baseline justify-between gap-3 ${size === "lg" ? "text-sm" : "text-xs"}`}
       >
         <span className="font-semibold text-accent-pink">
-          <span className="font-deva">{sideLabels.paksh.deva}</span>{" "}
-          {sideLabels.paksh.latin} {clamped}%
+          {sideLabels.paksh} {clamped}%
         </span>
         <span className="font-semibold text-accent-mint">
-          {vipaksh}% {sideLabels.vipaksh.latin}{" "}
-          <span className="font-deva">{sideLabels.vipaksh.deva}</span>
+          {vipaksh}% {sideLabels.vipaksh}
         </span>
       </div>
 
       <div
         role="img"
-        aria-label={`Paksh ${clamped} percent, Vipaksh ${vipaksh} percent`}
+        aria-label={`For ${clamped} percent, Against ${vipaksh} percent`}
         className={`mt-2 flex gap-0.5 ${size === "lg" ? "h-3" : "h-2.5"}`}
       >
         <div
@@ -55,10 +53,7 @@ export default function SplitBar({ paksh, shift, size = "sm" }: SplitBarProps) {
                 gainer === "paksh" ? "text-accent-pink" : "text-accent-mint"
               }
             >
-              ▲ {Math.abs(shift)} pts to{" "}
-              {gainer === "paksh"
-                ? sideLabels.paksh.latin
-                : sideLabels.vipaksh.latin}
+              ▲ {Math.abs(shift)} pts to {sideLabels[gainer]}
             </span>{" "}
             since opening
           </>
