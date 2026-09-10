@@ -30,7 +30,7 @@ export default function VivaadCard({ vivaad }: { vivaad: Vivaad }) {
   return (
     <article className="group relative rounded-2xl border border-line bg-surface p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift sm:p-5">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-semibold text-muted">
-        <span className="font-deva text-accent-purple">वाद-विवाद</span>
+        <span className="text-accent-purple">Debate</span>
         <span aria-hidden>·</span>
         <span>
           Round {round} of {totalRounds}
