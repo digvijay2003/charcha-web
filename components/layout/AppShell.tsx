@@ -5,6 +5,7 @@ import MobileNav from "@/components/layout/MobileNav";
 import RailContent from "@/components/layout/RailContent";
 import RoomHeader from "@/components/layout/RoomHeader";
 import Topbar from "@/components/layout/Topbar";
+import YouNav from "@/components/layout/YouNav";
 import type { Mode } from "@/lib/modes";
 
 export default function AppShell({
@@ -19,7 +20,8 @@ export default function AppShell({
   stat?: string;
   showRoomHeader?: boolean;
 }) {
-  const hasRail = mode !== "gupt";
+  // Gupt-Charcha keeps your own navigation but carries no discovery widgets.
+  const hasHighlights = mode !== "gupt";
 
   return (
     <div className={`mode-${mode} min-h-dvh bg-canvas`}>
@@ -32,7 +34,7 @@ export default function AppShell({
 
             {children}
 
-            {hasRail ? (
+            {hasHighlights ? (
               <div className="grid items-start gap-4 sm:grid-cols-2 xl:hidden">
                 <RailContent mode={mode} idSuffix="-inline" />
               </div>
@@ -43,14 +45,13 @@ export default function AppShell({
           </div>
         </main>
 
-        {hasRail ? (
-          <aside
-            aria-label="Room highlights"
-            className="rail-scroll sticky top-[61px] hidden max-h-[calc(100dvh-61px)] w-[300px] shrink-0 flex-col gap-4 overflow-y-auto py-8 pr-8 xl:flex"
-          >
-            <RailContent mode={mode} />
-          </aside>
-        ) : null}
+        <aside
+          aria-label="Your activity and highlights"
+          className="rail-scroll sticky top-[61px] hidden max-h-[calc(100dvh-61px)] w-[300px] shrink-0 flex-col gap-4 overflow-y-auto py-8 pr-8 xl:flex"
+        >
+          <YouNav />
+          <RailContent mode={mode} />
+        </aside>
       </div>
 
       <MobileNav />

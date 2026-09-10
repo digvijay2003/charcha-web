@@ -2,13 +2,16 @@ import {
   Bell,
   Bookmark,
   Briefcase,
+  Compass,
   Cpu,
   GraduationCap,
   Heart,
   Landmark,
   Mail,
   MessageCircle,
+  MessagesSquare,
   Sprout,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -22,19 +25,17 @@ export type NavItem = {
   badge?: number;
 };
 
-/** Small icon buttons on the right of the top bar. */
+/**
+ * Your own activity. Lives in the right column on wide screens and in the
+ * account menu everywhere, so it is never more than one click away.
+ */
 export const utilityNav: NavItem[] = [
   { label: "Notifications", href: "/notifications", icon: Bell, badge: 3 },
   { label: "Messages", href: "/messages", icon: Mail },
   { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
-];
-
-/** Views of the Charcha feed. These sit above the cards, not in a sidebar. */
-export const feedTabs: { label: string; href: string }[] = [
-  { label: "Trending", href: "/" },
-  { label: "Following", href: "/following" },
-  { label: "My Discussions", href: "/discussions" },
-  { label: "Explore", href: "/explore" },
+  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+  { label: "Following", href: "/following", icon: Users },
+  { label: "Explore", href: "/explore", icon: Compass },
 ];
 
 export type Discussion = {
