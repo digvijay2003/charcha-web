@@ -6,12 +6,10 @@ import {
   Cpu,
   GraduationCap,
   Heart,
-  House,
   Landmark,
   Mail,
   MessageCircle,
   MessagesSquare,
-  Scale,
   Sprout,
   Users,
   type LucideIcon,
@@ -27,23 +25,17 @@ export type NavItem = {
   badge?: number;
 };
 
-export const navItems: NavItem[] = [
-  { label: "Home", href: "/", icon: House },
-  { label: "Vaad-Vivaad", href: "/vaad-vivaad", icon: Scale },
-  { label: "Explore", href: "/explore", icon: Compass },
-  { label: "Following", href: "/following", icon: Users },
-  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
-  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+/**
+ * Your own activity. Lives in the right column on wide screens and in the
+ * account menu everywhere, so it is never more than one click away.
+ */
+export const utilityNav: NavItem[] = [
   { label: "Notifications", href: "/notifications", icon: Bell, badge: 3 },
   { label: "Messages", href: "/messages", icon: Mail },
-];
-
-/** Condensed set shown in the mobile bottom bar. */
-export const mobileNavItems: NavItem[] = [
-  { label: "Home", href: "/", icon: House },
+  { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
+  { label: "My Discussions", href: "/discussions", icon: MessagesSquare },
+  { label: "Following", href: "/following", icon: Users },
   { label: "Explore", href: "/explore", icon: Compass },
-  { label: "Discussions", href: "/discussions", icon: MessagesSquare },
-  { label: "Alerts", href: "/notifications", icon: Bell, badge: 3 },
 ];
 
 export type Discussion = {
@@ -113,34 +105,6 @@ export const discussions: Discussion[] = [
   },
 ];
 
-export type Insight = {
-  value: string;
-  label: string;
-  delta: string;
-  accent: Accent;
-};
-
-export const insights: Insight[] = [
-  {
-    value: "12.4K",
-    label: "Active Discussers",
-    delta: "+18% this week",
-    accent: "purple",
-  },
-  {
-    value: "245",
-    label: "Discussions Today",
-    delta: "+32% today",
-    accent: "pink",
-  },
-  {
-    value: "98%",
-    label: "Respectful Conversations",
-    delta: "Community Rating",
-    accent: "mint",
-  },
-];
-
 export type Topic = {
   name: string;
   count: string;
@@ -157,18 +121,6 @@ export const topics: Topic[] = [
   { name: "Lifestyle", count: "980", icon: Sprout, accent: "mint" },
 ];
 
-/** People shown in the "Active Now" avatar cluster. */
-export const activeNow = {
-  people: ["Arjun Singh", "Meera Joshi", "Ken Watanabe", "Fatima Noor", "Luis Ortega"],
-  overflow: "+245",
-};
-
-export const thoughtOfTheDay = {
-  quote:
-    "The quality of your questions determines the quality of your life.",
-  author: "Unknown",
-};
-
 export const currentUser = {
   name: "Arjun Singh",
   handle: "@arjun.charcha",
@@ -176,5 +128,13 @@ export const currentUser = {
 
 export const streakDays = 7;
 
-/** Small helper so the balance bar is never a colour-only signal. */
-export const perspectiveIcon: LucideIcon = Scale;
+
+/** Deliberately surfaced counter-view — blueprint §8.2, not an engagement bait feed. */
+export const unseenPerspective = {
+  discussionId: "1",
+  topic: "Will AI replace human jobs?",
+  stance: "Disagree",
+  share: 38,
+  body: "Every automation wave since the loom was predicted to end work. Each one moved it. The question is not whether jobs vanish but who pays for the transition.",
+  author: "Ibrahim Khan",
+};

@@ -1,20 +1,39 @@
-import Link from "next/link";
-import { Flame, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
-import Avatar from "@/components/ui/Avatar";
-import { LogoMark } from "@/components/ui/Logo";
-import ThemeToggle from "@/components/ui/ThemeToggle";
-import { currentUser, streakDays } from "@/lib/mock-data";
+import NavLink from "@/components/layout/NavLink";
+import Logo from "@/components/ui/Logo";
+import ProfileMenu from "@/components/ui/ProfileMenu";
+import { modeOrder, modes } from "@/lib/modes";
 
+/**
+ * Logo, the three rooms, search, avatar. Search sits with the tabs so the bar
+ * is left-weighted and has no empty middle; everything personal is behind the
+ * avatar or in the right column.
+ */
 export default function Topbar() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-canvas/85 backdrop-blur-md">
-      <div className="flex items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="lg:hidden" aria-label="Charcha home">
-          <LogoMark className="size-9" />
-        </Link>
+      <div className="mx-auto flex max-w-[1560px] items-center gap-4 px-4 sm:px-6 lg:gap-6 lg:px-8">
+        <div className="py-3">
+          <Logo />
+        </div>
 
-        <div role="search" className="relative min-w-0 flex-1 sm:max-w-md">
+        <nav aria-label="Rooms" className="hidden items-stretch self-stretch lg:flex">
+          {modeOrder.map((key) => {
+            const { href, latin } = modes[key];
+            return (
+              <NavLink
+                key={key}
+                href={href}
+                className="-mb-px flex items-center border-b-2 border-transparent px-4 text-sm font-medium text-muted transition-colors hover:text-ink aria-[current=page]:border-mode aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+              >
+                {latin}
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        <div role="search" className="relative min-w-0 flex-1 py-3 lg:ml-2 lg:max-w-md">
           <label htmlFor="charcha-search" className="sr-only">
             Search Charcha
           </label>
@@ -25,20 +44,13 @@ export default function Topbar() {
           <input
             id="charcha-search"
             type="search"
-            placeholder="Search for discussions, topics or people..."
-            className="w-full rounded-xl border border-line bg-surface py-2.5 pr-4 pl-10 text-sm text-ink transition-colors outline-none placeholder:text-muted focus:border-brand/60 focus:ring-4 focus:ring-brand/10"
+            placeholder="Search"
+            className="w-full rounded-lg border border-line bg-surface py-2 pr-3 pl-10 text-sm text-ink transition-colors outline-none placeholder:text-muted focus:border-mode/60 focus:ring-4 focus:ring-mode/10"
           />
         </div>
 
-        <div className="ml-auto flex items-center gap-2">
-          <span className="hidden items-center gap-1.5 rounded-full bg-soft-orange px-3 py-1.5 text-xs font-semibold text-accent-orange sm:inline-flex">
-            <Flame className="size-3.5" aria-hidden />
-            {streakDays} Day Streak
-          </span>
-          <ThemeToggle />
-          <Link href="/profile" aria-label={`Your profile, ${currentUser.name}`}>
-            <Avatar name={currentUser.name} size="md" decorative />
-          </Link>
+        <div className="ml-auto py-3">
+          <ProfileMenu />
         </div>
       </div>
     </header>
