@@ -29,3 +29,4 @@ new one and mark the old one superseded — the point is the trail.
 | [0010](0010-account-popover-and-right-column-nav.md) | Account popover; activity nav in the right column | Accepted |
 | [0011](0011-raster-brand-mark-on-a-light-tile.md) | Ship the raster mark, plated on a light tile | Accepted |
 | [0012](0012-class-based-dark-mode.md) | Class-based dark mode with a pre-paint script | Accepted |
+| [0013](0013-commit-directly-to-the-integration-branch.md) | Commit directly to `development-digvijay` | Accepted |

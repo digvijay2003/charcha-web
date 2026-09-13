@@ -4,21 +4,47 @@ Three long-lived branches, one automated hop, one manual hop
 ([ADR 0009](decisions/0009-branch-pipeline.md)).
 
 ```
-feature/*  ──►  development-digvijay  ──►  staging  ──►  main
-   local         integration          auto, if green   manual PR
-   merge                                                (production)
+development-digvijay  ──►  staging  ──►  main
+    you commit here      auto, if green   manual PR
+                                          (production)
 ```
 
 | Branch | Role | How code arrives | Vercel |
 | --- | --- | --- | --- |
-| `feature/*` | One change | You create it | Preview |
-| `development-digvijay` | Integration | You merge features in | Preview |
+| `development-digvijay` | Where work happens | **You commit directly** | Preview |
 | `staging` | Verified | **Automatically**, by CI, when green | Preview |
 | `main` | Production | **Manually**, by pull request | Production |
 
 The asymmetry is the design. Getting to staging should be frictionless, because
 nothing there is user-visible. Getting to production should require a human
 clicking merge.
+
+## Where to commit
+
+**Default: commit directly to `development-digvijay`.** The quality gate is what
+protects `staging`, not a branch — a broken commit fails lint, typecheck or build
+and the promotion never runs ([ADR 0013](decisions/0013-commit-directly-to-the-integration-branch.md)).
+
+**Use a `feature/*` branch when one of these is true:**
+
+- The work needs several commits before it is coherent, and you do not want the
+  intermediate states on staging.
+- You want to look at it on its own Vercel preview URL before it goes anywhere.
+- You might throw it away. Deleting a branch is cleaner than reverting.
+
+Merge a finished branch with `--ff-only` where possible, rebasing first, so the
+history stays linear and one-commit branches leave no merge commit behind:
+
+```bash
+git rebase development-digvijay          # on the feature branch
+git checkout development-digvijay
+git merge --ff-only feature/whatever
+git branch -d feature/whatever           # delete it once merged
+```
+
+**What CI cannot catch.** The gate proves a commit compiles, not that it looks
+right. Anything visual is verified by hand at 320 / 390 / 1024 / 1280 / 1440px in
+both themes before committing — that is the check direct commits rely on.
 
 ## Workflows
 

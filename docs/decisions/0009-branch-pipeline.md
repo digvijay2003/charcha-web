@@ -2,6 +2,8 @@
 
 **Status:** Accepted
 **Date:** 2026-08-29
+**Refined by:** [0013](0013-commit-directly-to-the-integration-branch.md) —
+the `feature/*` step is now optional; the rest stands.
 
 ## Context
 

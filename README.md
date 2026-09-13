@@ -52,11 +52,14 @@ Read [docs/README.md](docs/README.md) for when to update which.
 ## Branches
 
 ```
-feature/* → development-digvijay → staging → main
-                       (auto, if green)   (manual PR, production)
+development-digvijay → staging → main
+   you commit here    (auto, if green)  (manual PR, production)
 ```
 
-Details in [docs/pipeline.md](docs/pipeline.md).
+Commit straight to `development-digvijay`; the CI gate is what keeps broken
+work off `staging`. Branch only when work needs several commits to become
+coherent, or its own preview URL. Details in
+[docs/pipeline.md](docs/pipeline.md#where-to-commit).
 
 ## A warning about Next.js
 
