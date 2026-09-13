@@ -1,27 +1,26 @@
+import Image from "next/image";
 import Link from "next/link";
 
 /**
- * Abstract mark: two overlapping circles — two perspectives, with shared
- * ground where they meet.
+ * The brand mark: a C built from two overlapping speech bubbles. The indigo
+ * end of its gradient is near-invisible on the dark canvas, so it sits on a
+ * light tile there - unboxed in light mode, where it needs nothing.
  */
-export function LogoMark({ className = "size-9" }: { className?: string }) {
+export function LogoMark({ size = 36 }: { size?: number }) {
   return (
     <span
       aria-hidden
-      className={`charcha-gradient grid shrink-0 place-items-center rounded-xl shadow-sm ${className}`}
+      className="inline-grid shrink-0 place-items-center rounded-lg dark:bg-[#f4f3fa] dark:p-[3px]"
+      style={{ width: size, height: size }}
     >
-      <svg viewBox="0 0 24 24" fill="none" className="size-[62%]">
-        <circle cx="9.4" cy="12" r="5.4" stroke="white" strokeWidth="1.7" />
-        <circle
-          cx="14.6"
-          cy="12"
-          r="5.4"
-          stroke="white"
-          strokeWidth="1.7"
-          strokeOpacity="0.75"
-        />
-        <circle cx="12" cy="12" r="1.5" fill="white" />
-      </svg>
+      <Image
+        src="/brand/charcha-mark.png"
+        alt=""
+        width={size}
+        height={size}
+        priority
+        className="h-full w-full"
+      />
     </span>
   );
 }
